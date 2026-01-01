@@ -3,61 +3,61 @@
 import pytest
 
 
-def test_curl_import():
-    """Test that we can import the curl module."""
-    try:
-        from {{ cookiecutter.module_name }} import curl
-        assert curl is not None
-    except ImportError as e:
-        pytest.skip(f"Curl module not available: {e}")
+def test_hello_world():
+    """Test the hello_world function."""
+    from {{ cookiecutter.module_name }} import hello_world
+
+    result = hello_world()
+    assert result == "Hello, World from {{ cookiecutter.module_name }}!"
 
 
-def test_curl_response_class():
-    """Test CurlResponse class functionality."""
-    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import CurlResponse
+def test_calculator_class():
+    """Test Calculator class functionality."""
+    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import Calculator
 
-    # Test basic response
-    response = CurlResponse(status_code=200, data=b"Hello World")
-    assert response.status_code == 200
-    assert response.data == b"Hello World"
-    assert response.text == "Hello World"
-    assert response.headers == {}
+    # Test basic functionality
+    calc = Calculator()
+    assert calc.get_value() == 0.0
 
-    # Test with headers
-    response = CurlResponse(
-        status_code=404,
-        data=b"Not Found",
-        headers={"Content-Type": "text/plain"}
-    )
-    assert response.status_code == 404
-    assert response.headers["Content-Type"] == "text/plain"
+    # Test addition
+    calc.add(5.0)
+    assert calc.get_value() == 5.0
 
+    # Test subtraction
+    calc.subtract(2.0)
+    assert calc.get_value() == 3.0
 
-def test_curl_response_json():
-    """Test JSON parsing in CurlResponse."""
-    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import CurlResponse
+    # Test multiplication
+    calc.multiply(3.0)
+    assert calc.get_value() == 9.0
 
-    # Test valid JSON
-    json_data = '{"key": "value", "number": 42}'
-    response = CurlResponse(status_code=200, data=json_data.encode('utf-8'))
-    parsed = response.json()
-    assert parsed["key"] == "value"
-    assert parsed["number"] == 42
+    # Test division
+    calc.divide(3.0)
+    assert calc.get_value() == 3.0
 
-    # Test invalid JSON
-    response = CurlResponse(status_code=200, data=b"invalid json")
-    with pytest.raises(Exception):
-        response.json()
+    # Test with initial value
+    calc2 = Calculator(10.0)
+    assert calc2.get_value() == 10.0
 
 
-@pytest.mark.skip(reason="Requires compiled Cython module")
-def test_curl_instance():
-    """Test Curl instance creation."""
-    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import Curl
+def test_calculator_divide_by_zero():
+    """Test Calculator division by zero handling."""
+    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import Calculator
 
-    # This test will only work after the Cython module is compiled
-    curl_instance = Curl()
-    assert curl_instance is not None
+    calc = Calculator(10.0)
+    with pytest.raises(ZeroDivisionError):
+        calc.divide(0.0)
+
+
+def test_calculator_reset():
+    """Test Calculator reset functionality."""
+    from {{ cookiecutter.module_name }}.{{ cookiecutter.module_name }} import Calculator
+
+    calc = Calculator(5.0)
+    assert calc.get_value() == 5.0
+
+    calc.reset()
+    assert calc.get_value() == 0.0
 
 
 if __name__ == "__main__":

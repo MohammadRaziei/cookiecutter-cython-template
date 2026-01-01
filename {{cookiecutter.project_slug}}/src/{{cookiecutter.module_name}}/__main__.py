@@ -1,17 +1,21 @@
 """Command-line interface for {{ cookiecutter.project_slug }}."""
 
 import click
-from {{ cookiecutter.module_name }} import Curl
+from {{ cookiecutter.module_name }} import hello_world, Calculator
 
 
 @click.command()
-@click.argument('url')
-def main(url):
-    """Simple command-line tool to make HTTP requests using {{ cookiecutter.project_slug }}."""
-    curl = Curl()
-    response = curl.get(url)
-    click.echo(f"Status: {response.status_code}")
-    click.echo(f"Body: {response.text}")
+@click.option('--calculate', '-c', default=None, type=str,
+              help='Perform a calculation (e.g., "5 + 3")')
+def main(calculate):
+    """Simple command-line tool for {{ cookiecutter.project_slug }}."""
+    if calculate:
+        # Simple calculation example
+        calc = Calculator()
+        # This is just a basic example - in a real app you'd want proper parsing
+        print(f"Calculation result: {calculate} = {eval(calculate)}")  # NOQA
+    else:
+        print(hello_world())
 
 
 if __name__ == "__main__":
