@@ -1,8 +1,7 @@
 {
     "project_name": "My Cython Project",
-    "project_slug": "my-cython-project",
-    "module_name": "my_cython_project",
-    "repo_name": "{{ cookiecutter.project_slug }}",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '-') }}",
+    "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "package_description": "A Cython project with scikit-build",
     "version": "0.1.0",
     "author_name": "Your Name",
@@ -10,7 +9,7 @@
     "github_username": "your-github-username",
     "license": "MIT",
     "python_version": ">=3.8",
-    "project_url": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}",
+    "project_url": "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "has_cli": true,
     "use_cmake": true,
     "cython_language_level": "3"

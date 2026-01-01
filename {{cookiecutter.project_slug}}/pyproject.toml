@@ -47,8 +47,8 @@ dev = [
 
 [project.urls]
 "Homepage" = "{{ cookiecutter.project_url }}"
-"Bug Tracker" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/issues"
-"Document" = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.repo_name }}"
+"Bug Tracker" = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/issues"
+"Document" = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
 
 
 [tool.setuptools.package-dir]

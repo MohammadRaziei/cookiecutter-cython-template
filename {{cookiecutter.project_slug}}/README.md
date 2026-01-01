@@ -24,7 +24,7 @@ pip install {{ cookiecutter.project_slug }}
 
 For the latest development version:
 ```bash
-pip install git+https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}.git
+pip install git+https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
 ```
 
 ## Quick Start
